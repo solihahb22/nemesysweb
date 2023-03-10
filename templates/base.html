@@ -1,0 +1,227 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>
+        {% block title %}
+
+        {% endblock title %}
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    background-color: grey;
+    color:white;
+}
+
+.container {
+    width: 80%;
+    margin-top:80px;
+    padding: 15px;
+    background-size:100% auto;
+    position:relative;
+    margin-bottom:80px;
+
+}
+.box {
+    width: 55%;
+    margin-top:10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+    padding: 15px;
+    background-size:100% auto;
+    position:relative;
+    border-radius:15px;
+    border:none;
+   box-sizing:content-box;
+   left:25%;
+
+}
+
+.card {
+   margin-top:10%;
+   width:100%;
+   padding:25px;
+   border:none;
+
+}
+
+.footer{
+    width: 100%;
+    height: 50px;
+    padding-left: 10px;
+    line-height: 50px;
+    background: #aaa;
+    color: #fff;
+    color:black;
+    text-align:center;
+}
+
+
+    </style>
+
+
+
+</head>
+<body>
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="margin-left:200px;">
+            <img src="../../static/images/logoip.png" alt="" width="120" height="40"
+                 class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+
+
+                {% if user.is_authenticated %}
+                {% if user.is_superuser%}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink5" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'admin:index'  %}">Kelola User</a></li>
+
+
+                    </ul>
+                    {% endif %}
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Unit Boiler
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'setparam:createub' %}">Daftar Unit Boiler</a></li>
+                       <!-- <li><a class="dropdown-item" href="{% url 'setparam:setroh' %}">Set ROH Unit Boiler</a></li> !-->
+                        <li><a class="dropdown-item" href="{% url 'setparam:createhpbb' %}">Set Harga Perkiraan
+                            Batubara</a></li>
+                        <li><a class="dropdown-item" href="{% url 'setparam:unggahparam' %}">Set Parameter Optimasi dari
+                            File</a></li>
+                        <li><a class="dropdown-item" href="{% url 'setparam:prmoptbeban' %}">Set Parameter Optimasi
+                            Pembebanan</a></li>
+                        <li><a class="dropdown-item" href="{% url 'setparam:createprmblending' %}">Set Parameter
+                            Optimasi Blending</a></li>
+                        <li><a class="dropdown-item" href="{% url 'setparam:prmoptbebanlist'%}">Daftar Parameter
+                            Optimasi Pembebanan</a></li>
+                        <li><a class="dropdown-item" href="{% url 'setparam:parameterblendinglist'%}">Daftar Parameter
+                            Optimasi Blending</a></li>
+
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Rencana Operasional Harian (ROH)
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'optbeban:unggah_roh' %}">Unggah ROH</a></li>
+                      <!--  <li><a class="dropdown-item" href="{% url 'optbeban:selectunitoptb' %}">Hitung Beban Unit</a> </li> -->
+                        <!--<li><a class="dropdown-item" href="{% url 'optbeban:calculate_rku' %}">Hitung Rekomendasi Kalor Harian</a></li>!-->
+                        <li><a class="dropdown-item" href="{% url 'optbeban:view_rku' %}">Cek Rekomendasi Operasional Harian</a></li>
+
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Stok Bahanbakar
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <!--<li><a class="dropdown-item" href="{% url 'coaljson:getcoalstockfromspecapi' %}">Get Coal Stock From API</a></li>-->
+                         <li><a class="dropdown-item" href="{% url 'coaljson:getbioforblend' %}">Penyiapan bahanbakar untuk bending </a></li>
+                        <!--<li><a class="dropdown-item" href="{% url 'coaljson:preparecoalforblending' %}">Penyiapan data bahanbakar untuk bending </a></li> -->
+
+                        <!-- <li><a class="dropdown-item" href="{% url 'coaljson:getcoalstockfromapi' %}">Siapkan Coal dan Biomassa </a></li> -->
+                        <li><a class="dropdown-item" href="{% url 'coaljson:search_coal_stock_unit_short' %}">Lihat stok hari ini </a></li>
+                        <li><a class="dropdown-item" href="{% url 'coaljson:search_coal_stock_unit' %}">Lihat stok hari ini (detail)</a></li>
+                         <!--<li><a class="dropdown-item" href="{% url 'coaljson:search_coal_stock_unit_old' %}">Lihat Stok lampau (detail)</a></li>-->
+
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Blending
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'blending:prepareblending' %}">Prepare Blanding</a></li>
+                        <li><a class="dropdown-item" href="{% url 'blending:calculateblending' %}">Blending</a></li>
+                        <li><a class="dropdown-item" href="{% url 'blending:searchresumehistory' %}">Arsip Blending
+                            (Resume)</a></li>
+
+                        <li><a class="dropdown-item" href="{% url 'blending:searchhistory' %}">Arsip Blending</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink4" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.get_username }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="userMenu">
+                        <li><a class="nav-link" href="{% url 'blending:createnote' %}">Create Note</a></li>
+                        <li><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+
+                    </ul>
+                </li>
+
+
+                {% endif %}
+            </ul>
+        </div>
+          <a class="navbar-brand" href="#" style="margin-right:200px;">
+            <img src="../../static/images/logo_n.png" alt="" width="160" height="50"
+                 class="d-inline-block align-text-top">
+        </a>
+    </div>
+</nav>
+
+
+<div class="container">
+    {% block content %}
+
+    {% endblock content %}
+</div>
+
+
+<!--    Footer -->
+
+
+<footer class="footer fixed-bottom">
+    <div style="font-color:black; text-center">
+        <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
+            <a href="#">Teknik Informatika Universitas Trisakti</a>
+        </p>
+    </div>
+</footer>
+
+
+
+<!--<script src="{% static 'js/jquery.js' %}"></script>-->
+<!--<script src="{% static 'js/bootstrap.min.js' %}"></script>-->
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"> </script>
+<script src='https://code.jquery.com/jquery-3.2.1.min.js'> </script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+ {% block script %}
+ {% endblock script%}
+</body>
+</html>

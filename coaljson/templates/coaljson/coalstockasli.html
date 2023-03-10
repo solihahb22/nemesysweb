@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>coal stock</title>
+</head>
+<body>
+<h1>Coal Stock</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Sumber Pasokan</th>
+        <th>Pemasok</th>
+        <th>Kategori</th>
+        <th>Kalori</th>
+        <th>Total Moisture</th>
+        <th>Total Shulfur</th>
+        <th>Total Ash</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for coal in coals %}
+    <tr>
+        <td>
+            {{ coal.sumberpasokan }}<br>
+        </td>
+        <td>
+            {{ coal.Pemasok }}<br>
+        </td>
+        <td>
+            {{ coal.Kategori }}<br>
+        </td>
+        <td>
+            {{coal.Kalori}}
+        </td>
+        <td>
+            {{coal.TM}}
+        </td>
+        <td>
+            {{coal.TS}}
+        </td>
+        <td>
+            {{coal.ASH}}
+        </td>
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

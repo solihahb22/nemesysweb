@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h3><p> Are you sure you want to delete harga perkiraan batubara: {{object.bulan}} - {{object.tahun}} ?"</p></h3>
+
+    <form method="POST" action="{% url 'setparam:deletehpbb' object.id %}">
+        {% csrf_token %}
+
+
+        <input type="submit" value="Confirm" class="btn btn-warning">
+        <a href= "{% url 'setparam:createhpbb' %}" class="btn btn-default"> Cancel </a>
+    </form>
+
+{% endblock content %}

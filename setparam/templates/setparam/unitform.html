@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<div class="alert alert-primary" role="alert">
+    <h3>{{ judul }} {{ form.}}</h3>
+</div>
+<form method="POST">
+    {% csrf_token %}
+
+    {% for data in form %}
+    <div class="form-group">
+        <label class="col-sm-2 col-form-label">{{data.label_tag}}</label>
+        <div class="col-sm-12">
+            {{data}}
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+    {% if edited %}
+    <button type="submit" class="btn btn-primary ">Simpan</button>
+    {% endif %}
+    <a class="btn btn-secondary" href="{% url 'setparam:createub' %}">Cancel</a>
+</form>
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if error %}
+      <div class="alert alert-danger">
+            <strong>{{ pesan|escape }}</strong>
+        </div>
+{% endif %}
+<div class="row g-3">
+    <p></p>
+</div>
+<div class="alert alert-primary" role="alert">
+    <h3>Daftar Unit Boiler</h3>
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+
+        <th scope="col">Nama PLTU</th>
+        <th scope="col">Nama Unit</th>
+        <th scope="col">Tindakan</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for unit in units %}
+    <tr>
+        <td>{{ unit.namapltu }}</td>
+        <td>{{ unit.namaunit }}</td>
+
+        <td>
+
+            <form method="post" action="#">
+                {% csrf_token %}
+                <a href="{% url 'setparam:viewunit' unit.id %}" class="btn btn-outline-success">View</a>
+                <a href="{% url 'setparam:updateunit' unit.id %}" class="btn btn-outline-success">Edit</a>
+                <a href="{% url 'setparam:deleteunit' unit.id %}" class="btn btn-outline-warning">Delete</a>
+
+
+            </form>
+
+
+        </td>
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
+

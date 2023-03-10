@@ -1,0 +1,72 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Parameter Blending</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+
+
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <h1 class="mt-2">Search Parameter Boiler</h1>
+                <hr class="mt-0 mb-4">
+                {% block content %}
+                {% crispy form form.helper %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <h1 class="mt-2">Daftar Unit Boiler</h1>
+
+            <table border="1">
+                <thead>
+                <tr>
+
+                    <th> Unit</th>
+                    <th>Daya Net</th>
+                    <th>AH</th>
+                    <th>VM</th>
+                    <th>Nilai Kalor Unit</th>
+                    <th>Corner</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for unitsetting in unitsettings %}
+                <tr>
+                    <td>
+                        {{ unitsetting.unit_id }}<br>
+                    </td>
+                    <td>
+                        {{ unitsetting.dayanet }}<br>
+                    </td>
+                    <td>
+                        {{unitsetting.AH}}
+                    </td>
+                    <td>
+                        {{unitsetting.VM}}
+                    </td>
+                    <td>
+                        {{unitsetting.nilaikalorunit}}
+                    </td>
+                    <td>
+                        {{unitsetting.corner}}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+
+</body>
+</html>

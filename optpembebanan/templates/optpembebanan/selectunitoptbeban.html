@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+{{heading}}
+{% endblock title %}
+
+{% block content %}
+<h4>Hitung Optimasi Pembebanan Pada Unit PLTU</h4>
+
+<div class="alert alert-warning" role="alert">
+    Pilih unit-unit dalam satu PLTU!
+</div>
+
+
+<form method="POST">
+    {% csrf_token %}
+
+
+    <table class="table">
+        <caption>List of unit</caption>
+        <thead>
+        <tr>
+            <th scope="col">Nama PLTU</th>
+            <th scope="col">Nama Unit</th>
+            <th scope="col">Pilih</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for unit in units %}
+        <tr>
+            <th scope="row">{{unit.namapltu}}</th>
+            <td>{{unit.namaunit}}</td>
+            <td>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="unit" value="{{unit.id}}" class="custom-control-input"
+                           id="customCheck1">
+
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-primary">Parameter Optimasi Pembebanan</li>
+
+        {% for data in form %}
+        <li class="list-group-item">
+            <div class="col-sm">
+                <label>{{data.label_tag}}</label>
+                <div class="col-sm-10">
+                    {{data}}
+                </div>
+            </div>
+
+        </li>
+        {% endfor %}
+        <li class="list-group-item">
+            <div class="col-sm-10">
+                <button type="submit">Hitung</button>
+            </div>
+
+        </li>
+
+        </div>
+
+
+    </ul>
+
+
+</form>
+
+
+{{selected_values}}
+
+
+<table class="table">
+    <caption>Parameter Optimasi Pembebanan Unit</caption>
+    <thead>
+    <tr>
+        <th scope="col">PLTU</th>
+        <th scope="col">Unit</th>
+        <th scope="col">Daya Min</th>
+        <th scope="col">Daya Max</th>
+        <th scope="col">Koefisien Optimasi Pembebanan</th>
+        <th scope="col">Koefisien Rekomendasi Kalor</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for param in param_opt_b %}
+    <tr>
+        <th scope="row">{{param.unit.namapltu}}</th>
+        <td>{{param.unit.namaunit}}</td>
+        <td>{{param.daya_min}}</td>
+        <td>{{param.daya_max}}</td>
+        <td>
+            <ul class="list-group">
+                <li class="list-group-item">a= {{param.koef_a_opt_beban }}</li>
+                <li class="list-group-item">b= {{param.koef_b_opt_beban }}</li>
+                <li class="list-group-item">c= {{param.koef_c_opt_beban }}</li>
+
+            </ul>
+        </td>
+        <td>
+            <ul class="list-group">
+                <li class="list-group-item">d= {{param.koef_d_rek_kalor}}</li>
+                <li class="list-group-item">e= {{param.koef_e_rek_kalor }}</li>
+                <li class="list-group-item">f= {{param.koef_f_rek_kalor }}</li>
+            </ul>
+        </td>
+
+    </tr>
+    {% endfor %}
+
+
+    </tbody>
+</table>
+
+<table class="table">
+    <caption>Hasil Optimasi Pembebanan Unit</caption>
+    <thead>
+    <tr>
+        <th scope="col">Unit</th>
+        <th scope="col">Beban</th>
+        <th scope="col">Biaya pembangkitan</th>
+        <th scope="col">NPHR</th>
+        <th scope="col">Biaya Produksi</th>
+        <th scope="col">Rekomendasi Kalor</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for param in optb_all %}
+    <tr>
+        <th scope="row">{{param.unit}}</th>
+        <td>{{param.punit}}</td>
+        <td>{{param.bea_pembangkit}}</td>
+        <td>{{param.nphr}}</td>
+        <td> {{param.beaprod}}</td>
+        <td>{{param.rk}}</td>
+        {% endfor %}
+    </tr>
+
+
+    </tbody>
+</table>
+
+
+{% endblock content %}

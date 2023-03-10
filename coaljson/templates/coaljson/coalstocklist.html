@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+<div class="alert alert-primary" role="alert">
+    <h3>Pilih Unit Boiler</h3>
+</div>
+
+    <form method="post">
+       {% csrf_token %}
+       {% for data in form %}
+    <div class="form-group">
+        <label class="col-sm-2 col-form-label">{{data.label_tag}}</label>
+        <div class="col-sm-12">
+            {{data}}
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+    <button type="submit" class="btn btn-success">Pilih</button>
+        <br>
+    </form>
+ 
+    {% if tampil is True %}
+
+         <h1>Stok Batubara </h1>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Tanggal</th>
+                <th scope="col">Unit</th>
+              <th scope="col">Spesifikasi</th>
+              <th scope="col">Letak</th>
+              <th scope="col">Jenis Bahan</th>
+               <th scope="col">Aksi</th>
+                <th scope="col">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+             {% for coal in stocks %}
+            <tr>
+              <th scope="row">{{coal.tanggal}}</th>
+                <td>{{coal.unit}}</td>
+              <td>{{coal.coalstock}}</td>
+              <td>{{coal.kategori_stock}}</td>
+              <td>{{coal.kategori_bhn_baku}}</td>
+                <td>
+                    <form method="post" >
+                        {% csrf_token %}
+                         <!--<a href="{% url 'coaljson:simpleupdatecoal' coal.id %}" class="btn btn-outline-success">Update</a>-->
+                         <a href="{% url 'coaljson:updatecoalstock' coal.id %}" class="btn btn-outline-success">Update</a>
+                    </form>
+                </td>
+                 <td>
+                    <form method="post" >
+                        {% csrf_token %}
+                        <a href="{% url 'coaljson:deletecoalstock' coal.id %}" class="btn btn-outline-warning" onsubmit="">Delete</a>
+                    </form>
+                </td>
+
+            </tr>
+           {% endfor %}
+          </tbody>
+        </table>
+    {% endif %}
+    {% if tampil is False%}
+        <h3>{{pesan}}</h3>
+    {% endif %}
+{% endblock %}

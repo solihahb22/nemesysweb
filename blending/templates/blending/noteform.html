@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="alert alert-primary" role="alert">
+        <h3>{{ judul }}</h3>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        {% for data in form %}
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label">{{data.label_tag}}</label>
+            <div class="col-sm-12">
+                {{data}}
+            </div>
+        </div>
+        {% endfor %}
+        <br>
+        <button type="submit" class="btn btn-primary ">Simpan</button>
+        <a class="btn btn-secondary" href="{% url 'blending:createnote' %}">Cancel</a>
+    </form>
+
+    <div class="row g-3">
+        <p></p>
+    </div>
+    <div class="alert alert-primary" role="alert">
+        <h3>Daftar Pesan</h3>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+
+            <th scope="col">Tanggal</th>
+            <th scope="col">User</th>
+            <th scope="col">Pesan</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for note in notes %}
+        <tr>
+            <td>{{ note.timestamp }}</td>
+            <td>{{ note.user }}</td>
+            <td>{{ note.pesan }}</td>
+
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
+

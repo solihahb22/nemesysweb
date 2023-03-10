@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+      <div class="row">
+        <div class="col-sm">
+            <h3 class="mt-2">Daftar Setting Parameter Optimasi Blending Unit</h3>
+        </div>
+      </div>
+
+
+
+              <table class="table table-striped">
+                  <thead>
+                    <tr>
+
+                      <th scope="col"> PLTU</th>
+                        <th scope="col">  Unit</th>
+                        <th scope="col">Aksi</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for parameterblending in parameterblendings %}
+                      <tr>
+                          <th scope="row">{{ parameterblending.unit.namapltu }}</th>
+                          <td>
+                          {{ parameterblending.unit.namaunit }}<br>
+                          </td>
+
+                          <td>
+                             <form method="post" >
+                                  {% csrf_token %}
+                                  <a href="{% url 'setparam:detailpbunit' parameterblending.unit.id %}" class="btn btn-outline-primary">Detail</a>
+                                 <a href="{% url 'setparam:updatepbunit' parameterblending.unit.id %}" class="btn btn-outline-success">Update</a>
+                                 <a href="{% url 'setparam:deletepbunit' parameterblending.unit.id %}" class="btn btn-outline-warning" onsubmit="">Delete</a>
+                              </form>
+                          </td>
+                          <td>
+
+                          </td>
+
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+            </div>
+      </div>
+    </div>
+
+
+{% endblock content%}

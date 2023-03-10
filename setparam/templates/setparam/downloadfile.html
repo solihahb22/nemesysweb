@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+     <div class="alert alert-primary" role="alert">
+            <h3>Download File Template Untuk Setting Parameter Boiler</h3>
+        </div>
+
+     <table class="table table-striped">
+                  <thead>
+                    <tr>
+
+                      <th scope="col"> No</th>
+                        <th scope="col">  Kategori</th>
+                        <th scope="col">Aksi</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <th scope="row">1</th>
+                          <td> Template Set Parameter Optimasi Pembebanan</td>
+                          <td>
+                             <form method="post" >
+                                  {% csrf_token %}
+                                  <a href="{% url 'setparam:detailpbunit' parameterblending.unit.id %}" class="btn btn-outline-primary">Unduh</a>
+                              </form>
+                          </td>
+                      </tr>
+                      <tr>
+                          <th scope="row">2</th>
+                          <td> Template Set Parameter Blending</td>
+                          <td>
+                             <form method="post" >
+                                  {% csrf_token %}
+                                  <a href="{% url 'setparam:downloadtemp' %}" class="btn btn-outline-primary">Unduh</a>
+                              </form>
+                          </td>
+                      </tr>
+                  </tbody>
+                </table>
+
+{% endblock content %}

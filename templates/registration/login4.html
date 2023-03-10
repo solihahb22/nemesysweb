@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %} Indonesia Power Project {% endblock %}
+{% load static %}
+
+{% block body %}
+
+<style>
+	*{
+		padding: 0;
+		margin: 0;
+		box-sizing: border-box;
+	}
+	body{
+		background: (219, 226, 226);
+	}
+	.row{
+		background: #ffff;
+		border-radius: 30px;
+		box-shadow: 7px 10px 10px grey;
+	}
+	img{
+		border-top-left-radius: 30px;
+		border-bottom-left-radius: 30px;
+	}
+	.btn1{
+		border: none;
+		outline: none;
+		height: 50px;
+		width: 100%;
+		background-color: 	#0000ff;
+		color: #ffff;
+		border-radius: 4px;
+		font-weight: bold;
+	}
+	.btn1:hover{
+		background: #ffff;
+		border: 1px solid;
+		color: #0000ff;
+	}
+</style>
+
+
+
+ <section class="form my-5 mx-6">
+	  	<div class="container">
+	  		<div class="row no-gutters">
+	  			<div class="col-lg-5">
+	  					<img src="{% static 'images/newpict.png' %}" class="img-fluid" alt="">
+	  			</div>
+	  			<div class="col-lg-7 px-5 pt-5">
+	  				<h4> Sign into your account</h4>
+	  				 <form method="post" action="{% url 'login' %}">
+            		{% csrf_token %}
+	  					<div class="form-row">
+	  						<div class="col-lg-7">
+	  							<input type="email" placeholder="Email Address" class="form-control my-4 p-4">
+	  						</div>
+	  					</div>
+	  					<div class="form-row">
+	  						<div class="col-lg-7">
+	  							<input type="password" placeholder="******" class="form-control my-4 p-4">
+	  						</div>
+	  					</div>
+	  					<div class="form-row">
+	  						<div class="col-lg-7">
+	  							<button type="button" class="btn1 mt-2 mb-5">Login</button>
+	  						</div>
+	  					</div>
+
+	  				</form>
+	  		</div>
+	  	</div>
+  </section>
+ </section
+
+
+{% endblock %}

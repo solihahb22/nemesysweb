@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+          {% block content %}
+          <h1 class="mt-2">Masukkan stock batubara</h1>
+             <form method="post">
+                {% csrf_token %}
+                <div class="container">
+                 {% for data in form %}
+                     <div class="form-group">
+                  <div class="row">
+                    <div class="col">
+                        <br>
+                     <label >{{data.label_tag}}</label>
+                    </div>
+                    <div class="col-10 ">
+                        <br>
+
+                      {{data}}
+                    </div>
+
+                  </div>
+                     </div>
+                    {% endfor %}
+                  <div class="row g-3">
+                        <br>
+                         <button type="submit" class="btn btn-success btn-block">Simpan</button>
+                    </div>
+
+
+
+                  </div>
+
+
+                </div>
+
+
+              </form>
+          {% endblock %}
+
+
+</body>
+</html>

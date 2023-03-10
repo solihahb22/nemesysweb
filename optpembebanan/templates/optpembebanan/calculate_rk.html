@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+     <div class="alert alert-primary" role="alert">
+            <h4>{{judul}} </h4>
+        </div>
+
+    <form method="post" >
+        {% csrf_token %}
+        <ul class="list-group">
+          <li class="list-group-item active" aria-current="true">Unduh Template File</li>
+          <li class="list-group-item">
+                <a href="{% url 'setparam:rohtemplate' %}" download>Unduh Template Setting ROH</a>
+          </li>
+
+        </ul>
+    </form>
+
+
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for data in form %}
+            <div class="form-group">
+                <label class="col-sm-2 col-form-label">{{data.label_tag}}</label>
+                <div class="col-sm-12">
+                     {{data}}
+                </div>
+            </div>
+        {% endfor %}
+        <br>
+         <button type="submit" class="btn btn-primary btn-lg btn-block">Unggah</button>
+    </form>
+
+    <br>
+    {% if pesan %}
+    <div class="alert alert-danger" role="alert">
+            <h4>{{pesan}}</h4>
+        </div>
+    {% endif %}
+    <br>
+    <div class="alert alert-primary" role="alert">
+            <h4> Rencana Operasional Harian {{ unit.namapltu}} {{namaunit}}</h4>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Timestamp</th>
+              <th scope="col">ROH</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {% for rohunit in rohunits %}
+            <tr>
+                <td>{{ rohunit.timestamp|date:'Y-m-d G:i:s'}}</td>
+                <td>{{ rohunit.roh}}</td>
+              <td>
+
+              </td>
+
+
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+{% endblock content %}

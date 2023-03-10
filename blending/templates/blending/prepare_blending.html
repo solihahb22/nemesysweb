@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{{ form.media }}
+
+{% block title %}
+{{heading}}
+{% endblock title %}
+
+{% block content %}
+    <div class="alert alert-secondary" role="alert">
+        Persiapan Bending
+    </div>
+
+
+
+    <form method="POST" >
+        {% csrf_token %}
+        <div class="form-group row">
+            {% for data in form %}
+            <div class="col-sm">
+                <label>{{data.label_tag}}</label>
+                <div class="col-sm-10">
+                    {{data}}
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="col-sm-10">
+            <button type="submit">Prepare</button>
+        </div>
+    </form>
+
+    <br>
+
+    {% if pesan is not None %}
+    <div class="alert alert-secondary" role="alert">
+        {{ pesan }}
+        </div>
+    {% endif %}
+    <br>
+{% endblock content %}

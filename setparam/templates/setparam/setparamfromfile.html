@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+     <div class="alert alert-primary" role="alert">
+            <h3>Tambahkan Setting Unit Boiler </h3>
+        </div>
+    <form method="post" >
+        {% csrf_token %}
+        <ul class="list-group">
+          <li class="list-group-item active" aria-current="true">Unduh Template File</li>
+          <li class="list-group-item">
+               <a href="{% static 'media/settingpembebanan.txt'%}" download>Unduh Template Setting Parameter Optimasi Pembebanan</a>
+          </li>
+          <li class="list-group-item">
+              <a href="{% static 'media/settingblending.txt'%}" download>Unduh Template Setting Parameter Blending</a>
+          </li>
+        </ul>
+
+
+    </form>
+
+
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for data in form %}
+            <div class="form-group">
+                <label class="col-sm-2 col-form-label">{{data.label_tag}}</label>
+                <div class="col-sm-12">
+                     {{data}}
+                </div>
+            </div>
+        {% endfor %}
+        <br>
+         <button type="submit" class="btn btn-primary btn-lg btn-block">Upload</button>
+    </form>
+
+        <p>{{ data }}</p>
+
+{% endblock content %}

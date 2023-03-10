@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+     <div class="alert alert-primary" role="alert">
+            <h3>Tambahkan Setting ROH Unit Boiler </h3>
+        </div>
+    <form method="post" >
+        {% csrf_token %}
+        <ul class="list-group">
+          <li class="list-group-item active" aria-current="true">Unduh Template File</li>
+          <li class="list-group-item">
+               <a href="{% url 'setparam:rohtemplate' %}" download>Unduh Template Setting ROH</a>
+          </li>
+
+        </ul>
+
+
+    </form>
+
+
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for data in form %}
+            <div class="form-group">
+                <label class="col-sm-2 col-form-label">{{data.label_tag}}</label>
+                <div class="col-sm-12">
+                     {{data}}
+                </div>
+            </div>
+        {% endfor %}
+        <br>
+         <button type="submit" class="btn btn-primary btn-lg btn-block">Upload</button>
+    </form>
+
+       <div class="alert alert-primary" role="alert">
+            <h3>Daftar ROH Unit </h3>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+
+              <th scope="col">Nama PLTU</th>
+              <th scope="col">Nama Unit</th>
+              <th scope="col">Time</th>
+                <th scope="col">ROH</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rohunit in rohunits %}
+            <tr>
+              <td>{{ rohunit.unit.namapltu }}</td>
+              <td>{{ rohunit.unit.namaunit }}</td>
+                <td>{{ rohunit.timestamp|date:'Y-m-d G:i:s'}}</td>
+                <td>{{ rohunit.roh}}</td>
+              <td>
+
+                  <form method="post" action="#">
+                      {% csrf_token %}
+                      <a href="#" class="btn btn-outline-success">Edit</a>
+                     <a href="#"  class="btn btn-outline-warning">Delete</a>
+
+
+                  </form>
+
+
+
+              </td>
+
+
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+{% endblock content %}

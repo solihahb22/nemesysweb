@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="alert alert-primary" role="alert">
+    <h3>{{pesan}}</h3>
+</div>
+<form method="POST">
+    {% csrf_token %}
+
+    {% for data in form %}
+    <div class="form-group">
+        <label class="col-sm-2 col-form-label">{{data.label_tag}}</label>
+        <div class="col-sm-12">
+            {{data}}
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+    <button type="submit" class="btn btn-primary ">Unduh</button>
+
+</form>
+
+<div class="row g-3">
+    <p></p>
+</div>
+<div class="alert alert-primary" role="alert">
+    <h3>Stok Batubara</h3>
+</div>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">Tanggal</th>
+        <th scope="col">Unit</th>
+        <th scope="col">Spesifikasi</th>
+        <th scope="col">Letak</th>
+        <th scope="col">Jenis Bahan</th>
+        <th scope="col">Aksi</th>
+        <th scope="col">Aksi</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for coal in coalstocks %}
+    <tr>
+        <th scope="row">{{coal.tanggal}}</th>
+        <td>{{coal.unit}}</td>
+        <td>{{coal.coalstock}}</td>
+        <td>{{coal.kategori_stock}}</td>
+        <td>{{coal.kategori_bhn_baku}}</td>
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
+

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+
+       <div class="alert alert-primary" role="alert">
+            <h3>Daftar ROH {{unit}} ({{time}})</h3>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+
+
+              <th scope="col">Time</th>
+                <th scope="col">ROH</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rohunit in rohunits %}
+            <tr>
+                <td>{{ rohunit.timestamp|date:'Y-m-d G:i:s'}}</td>
+                <td>{{ rohunit.roh}}</td>
+              <td>
+
+                  <form method="post" action="#">
+                      {% csrf_token %}
+                      <a href="#" class="btn btn-outline-success">Edit</a>
+                     <a href="#"  class="btn btn-outline-warning">Delete</a>
+
+
+                  </form>
+
+
+
+              </td>
+
+
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+   <section class="container-fluid bgidx">
+	<section class="row justify-content-center">
+
+                <div class="alert alert-warning" role="alert">
+
+                    <div class="text-center">
+                        <br>
+                  Anda log out! Silahkan login untuk memulai
+                        <br>
+                        </div>
+                </div>
+
+
+			    <br>
+			    <br>
+				{% if user.is_authenticated == False%}
+					<form method="post" action="{% url 'login' %}">
+						{% csrf_token %}
+						<div class="text-center">
+						<input type="submit" value="Klik untuk login" class="btn btn-warning">
+						</div>
+					</form>
+				{% endif %}
+		</section>
+	</section>
+</section>
+{% endblock content %}
+

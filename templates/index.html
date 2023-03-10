@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{heading}}
+{% endblock title %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="box">
+    <div class="row">
+        <div class="col-4 " style=" padding:0px; margin-top:0px;">
+            <img src="../../static/images/nemesys.png" max-widht="100%" height=auto" alt="" class="img-fluid rounded" style="margin-left:10px;">
+        </div>
+
+        <div class="col-8">
+            <div class="card">
+                <h5 class="" style="margin-top:20px" > Welcome to Nemesys Web </h5>
+				<h4>Hello {{user.username}} </h4>
+                <hr>
+{% else %}
+<div class="box">
+    <div class="row">
+        <div class="col-6 " style="padding:0px; margin-top:0px;">
+            <img src="../../static/images/newpict.png" max-widht="100%" height=auto" alt="" class="img-fluid rounded">
+        </div>
+
+        <div class="col-6">
+            <div class="card">
+                <h5 class="" style="margin-top:20px"> Sign into your account </h5>
+                <hr>
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="{{ form.username.id_for_label }}">Email</label>
+                        <input type="email" name="username" class="form-control"
+                               placeholder="Masukkan Email Anda">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="{{ form.password.id_for_label }}">Password</label>
+                        <input type="password" name="password" class="form-control"
+                               placeholder="Masukkan Password Anda">
+                    </div>
+
+
+                    <br>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">LOGIN</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endif %}
+{% endblock content %}

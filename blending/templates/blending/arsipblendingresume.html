@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{heading}}
+{% endblock title %}
+
+{% block content %}
+    <h1 class="mt-2">Pilih Unit Boiler</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <button type="submit" class="btn btn-success">Pilih</button>
+    </form>
+
+    <h2>History </h2>
+    <table class="table table-striped">
+
+        <thead>
+        <tr>
+            <th scope="col">Waktu Pengisian</th>
+            <th scope="col">Operator</th>
+            <th scope="col">Pemasok Coal 1</th>
+            <th scope="col">Pemasok Coal 2</th>
+            <th scope="col">Pemasok Biomass</th>
+            <th scope="col">Komposisi Coal 1</th>
+            <th scope="col">Komposisi Coal 2</th>
+            <th scope="col">Komposisi Biomass</th>
+            <th scope="col">Nilai Kalor</th>
+            <th scope="col">AFR</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for history in histories %}
+        <tr>
+            <td>
+                {{ history.waktu_pengisian }}<br>
+            </td>
+            <td>
+                {{ history.operator }}<br>
+            </td>
+            <td>
+                {{ history.pemasok1 }}<br>
+            </td>
+            <td>
+                {{history.pemasok2}}
+            </td>
+            {% if history.kategori == 'cofiring'%}
+            <td> {{history.pemasokbio}}</td>
+
+            {% elif history.kategori == 'coal blending'%}
+            <td> -</td>
+            {% endif %}
+            <td>
+                {{history.komposisic1 | floatformat:-2 }}
+            </td>
+            <td>
+                {{history.komposisic2 | floatformat:-2 }}
+            </td>
+            {% if history.kategori == 'cofiring'%}
+            <td> {{history.komposisibio}}</td>
+
+            {% elif history.kategori == 'coal blending'%}
+            <td> -</td>
+            {% endif %}
+
+            <td>
+                {{history.nilaikalor | floatformat:0}}
+            </td>
+            <td> 1: {{history.afr| floatformat:0}}</td>
+
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+{% endblock content %}

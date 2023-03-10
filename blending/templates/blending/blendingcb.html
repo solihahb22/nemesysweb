@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{heading}}
+{% endblock title %}
+
+{% block content %}
+
+    <div class="alert alert-secondary" role="alert">
+        Masukkan Parameter Bending
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+
+
+        <div class="form-group row">
+            {% for data in form %}
+            <div class="col-sm">
+                <label>{{data.label_tag}}</label>
+                <div class="col-sm-10">
+                    {{data}}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-sm-10">
+                <button type="submit">Blending</button>
+            </div>
+
+
+        </div>
+
+
+    </form>
+    <h3>
+
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h3>Spesifikasi Blending </h3></div>
+            <div class="panel-body">
+                <div class="modal-body row">
+                    <div class="col-md-6">
+                        <!-- Your first column here -->
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Komposisi
+                                <span class="badge bg-primary rounded-pill">
+                                    {{coalblending.komposisicoal1|floatformat:-2}} : {{coalblending.komposisicoal2|floatformat:-2}}
+                               </span>
+                            </li>
+                            <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                                Nilai Kalor
+                                <span class="badge bg-primary rounded-pill">
+                                  {{coalblending.Kalori|floatformat:-2}}
+                              </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Total Moisture
+                                <span class="badge bg-primary rounded-pill">
+                                   {{coalblending.TM|floatformat:-2}}
+                               </span>
+                            </li>
+                            <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                                Total Sulfur
+                                <span class="badge bg-primary rounded-pill">
+                                   {{coalblending.TS|floatformat:-4}}
+                               </span>
+
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Kadar Abu
+                                <span class="badge bg-primary rounded-pill">{{coalblending.ASH|floatformat:-3}}</span>
+
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Your second column here -->
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Excess Air
+                                <span class="badge bg-primary rounded-pill">
+                                   {{coalblending.ExcessAir|floatformat:-2}}</span>
+
+                            </li>
+                            <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                                AFR
+                                <span class="badge bg-primary rounded-pill">
+                                   1 : {{coalblending.AFR|floatformat:0}}
+                               </span>
+
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                MOT
+                                <span class="badge bg-primary rounded-pill">{{coalblending.MOT|floatformat:-2}}</span>
+
+                            </li>
+                            <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                                Tilting Burner
+                                <span class="badge bg-primary rounded-pill">
+                                   {{coalblending.Tilting|floatformat:-2}}</span>
+
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Potensi Slagging
+                                <span class="badge bg-warning rounded-pill">
+                                   {{coalblending.Slagging}}
+                               </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <h3>Spesifikasi Batubara dan Biomass Sumber</h3>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Spesifikasi</th>
+                    <th scope="col">Batubara 1</th>
+                    <th scope="col">Batubara 2</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Pemasok</th>
+                    <td>{{coalblending.coal1.Pemasok}}</td>
+                    <td>{{coalblending.coal2.Pemasok}}</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Nilai Kalor</th>
+                    <td>{{coalblending.coal1.Kalori}}</td>
+                    <td>{{coalblending.coal2.Kalori}}</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Total Moisture</th>
+                    <td>{{coalblending.coal1.TM}}</td>
+                    <td>{{coalblending.coal2.TM}}</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Total Sulfur</th>
+                    <td>{{coalblending.coal1.TS}}</td>
+                    <td>{{coalblending.coal2.TS}}</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Kadar Abu</th>
+                    <td>{{coalblending.coal1.ASH}}</td>
+                    <td>{{coalblending.coal2.ASH}}</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Potensi Slagging</th>
+                    <td>{{coalblending.coal1.Slagging}}</td>
+                    <td>{{coalblending.coal2.Slagging}}</td>
+
+                </tr>
+                </tbody>
+            </table>
+
+            <h3>Pengaturan Secondary Air Damper</h3>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Corner 1</th>
+                    <th scope="col">Corner 2</th>
+                    <th scope="col">Corner 3</th>
+                    <th scope="col">Corner 4</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Layer AA</th>
+                    <td>{{coalblending.damper1AA|floatformat:-2}}</td>
+                    <td>{{coalblending.damper2AA|floatformat:-2}}</td>
+                    <td>{{coalblending.damper3AA|floatformat:-2}}</td>
+                    <td>{{coalblending.damper4AA|floatformat:-2}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Layer AB</th>
+                    <
+                    <td>{{coalblending.damper1AB|floatformat:-2}}</td>
+                    <td>{{coalblending.damper2AB|floatformat:-2}}</td>
+                    <td>{{coalblending.damper3AB|floatformat:-2}}</td>
+                    <td>{{coalblending.damper4AB|floatformat:-2}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Layer CD</th>
+                    <td>{{coalblending.damper1CD|floatformat:-2}}</td>
+                    <td>{{coalblending.damper2CD|floatformat:-2}}</td>
+                    <td>{{coalblending.damper3CD|floatformat:-2}}</td>
+                    <td>{{coalblending.damper4CD|floatformat:-2}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Layer EF</th>
+                    <td>{{coalblending.damper1EF|floatformat:-2}}</td>
+                    <td>{{coalblending.damper2EF|floatformat:-2}}</td>
+                    <td>{{coalblending.damper3EF|floatformat:-2}}</td>
+                    <td>{{coalblending.damper4EF|floatformat:-2}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Layer FF</th>
+                    <td>{{coalblending.damper1FF|floatformat:-2}}</td>
+                    <td>{{coalblending.damper2FF|floatformat:-2}}</td>
+                    <td>{{coalblending.damper3FF|floatformat:-2}}</td>
+                    <td>{{coalblending.damper4FF|floatformat:-2}}</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </h3>
+
+
+{% endblock content %}

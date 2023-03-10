@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="alert alert-warning d-flex align-items-center" role="alert">
+      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+      <div>
+        <h3>Are you sure you want to delete {{object}} ?"</h3>
+      </div>
+
+    <form method="POST" action="{% url 'setparam:deleteunit' object.id %}">
+        {% csrf_token %}
+
+
+        <input type="submit" value="Confirm" class="btn btn-warning">
+        <a href= "{% url 'setparam:createub' %}" class="btn btn-default"> Cancel </a>
+    </form>
+
+{% endblock content %}

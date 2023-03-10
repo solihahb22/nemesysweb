@@ -1,0 +1,8 @@
+.bgidx{
+	background: url('/static/images/power.png');
+	background-repeat: no-repeat;
+	height: 100vh;
+	background-size: 100%;
+}
+
+

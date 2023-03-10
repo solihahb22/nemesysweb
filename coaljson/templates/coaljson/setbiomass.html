@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+    .progressbar {
+        width: 100%;
+        counter-reset: step;
+        padding-left: 1rem !important;
+    }
+    .progressbar li {
+        float: left;
+        position: relative;
+        text-align: center;
+    }
+    .progressbar li:before {
+        content:counter(step);
+        counter-increment: step;
+        width: 30px;
+        height: 30px;
+        border: 2px solid #E6E7F4;
+        background-color: #E6E7F4;
+        display: block;
+        margin: 0 auto 10px auto;
+        border-radius: 50%;
+        line-height: 27px;
+        background: #E6E7F4;
+        color: gray;
+        text-align: center;
+        font-weight: bold;
+        z-index: 1;
+    }
+    .progressbar li:after{
+        content: '';
+        position: absolute;
+        width:100%;
+        height: 3px;
+        background: #2B388F;
+        opacity: .1;
+        top: 15px;
+        left: -50%;
+    }
+    .progressbar li:first-child:after{
+        left: 0%;
+        width: 50%;
+        z-index: -1;
+    }
+    .progressbar li:last-child:after{
+        width: 150%;
+        z-index: 1;
+    }
+    .progressbar li.active:after{
+        background: #2B388F;
+        opacity: 1;
+        z-index: -99;
+       
+    }
+    .progressbar li.active {
+        color: #2B388F;
+        z-index: 1;
+    }
+    .progressbar li.active:before {
+        border-color: #fff500;
+        background: #fff500;
+        color: #2B388F;
+        z-index: 1;
+    } 
+</style>
+
+
+<div class="alert alert-primary" role="alert">
+    <h3> 1. Set Biomass Untuk Blending</h3>
+</div>
+
+
+<div class="row mt-5">
+
+    <div class="col-12">
+        <ul class="progressbar" >
+            <li class="" style="width:33%; list-style-type: none; z-index: 10000">Set Biomasa</li>
+            <li class="" style="width:33%; list-style-type: none; z-index: 1000">Set Tongkang</li>
+            <li class="" style="width:33%; list-style-type: none;">Set Coalyard</li>
+        </ul>
+    </div>
+
+     <div class="col-12 mt-5">
+        <table class="table table-bordered" id="coalTbl">
+            <thead>
+                <tr >
+                    <th scope="col">No ID</th>
+                    <th scope="col">Pemasok</th>
+                    <th scope="col">Kategori</th>
+                    <th scope="col">Kalori</th>
+                    <th scope="col">TM</th>
+                    <th scope="col">TS</th>
+                    <th scope="col">ASH</th>
+                    <th scope="col">HTmax</th>
+                    <th scope="col">Jenis Abu</th>
+                    <th scope="col">Slagging</th>
+                    <th scope="col">Sumber Pasokan</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for coal in coals %}
+                <tr class = "record">
+                    <th scope="row" >{{coal.id}}</th>
+                    <td><label id="pemasok-{{forloop.counter}}">{{coal.pemasok}}</label></td>
+                    <td><label id="kategori-{{forloop.counter}}">{{coal.kategori}}</label></td>
+                    <td><label id="kalori-{{forloop.counter}}">{{coal.kalori}}</label></td>
+                    <td><label id="tm-{{forloop.counter}}">{{coal.tm}}</label></td>
+                    <td><label id="ts-{{forloop.counter}}">{{coal.ts}}</label></td>
+                    <td><label id="ash-{{forloop.counter}}">{{coal.ash}}</label></td>
+                    <td><label id="htmax-{{forloop.counter}}">{{coal.htmax}}</label></td>
+                    <td><label id="jenisabu-{{forloop.counter}}">{{coal.jenisabu}}</label></td>
+                    <td><label id="slagging-{{forloop.counter}}">{{coal.slagging}}</label></td>
+                    <td>
+
+                             <a href="{% url 'coaljson:selectbioforblend' coal.id%}" value = "{{coal.id}}" class="link-select btn-outline-success">Pilih</a>
+
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    <br>
+
+
+
+
+</div>
+
+
+{% endblock %}
+
+
+

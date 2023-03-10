@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+     <div class="alert alert-primary" role="alert">
+            <h3>Cari Kalor Rekomendasi Unit Boiler </h3>
+        </div>
+
+   <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for data in form %}
+            <div class="form-group">
+                <label class="col-sm-2 col-form-label">{{data.label_tag}}</label>
+                <div class="col-sm-12">
+                     {{data}}
+                </div>
+            </div>
+        {% endfor %}
+        <br>
+         <button type="submit" class="btn btn-primary btn-lg btn-block">Cari</button>
+    </form>
+
+    <div class="alert alert-primary" role="alert">
+            <h3>Daftar Harga Perkiraan Batubara</h3>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+
+              <th scope="col">Bulan</th>
+              <th scope="col">Tahun</th>
+                <th scope="col">Harga Perkiraan (Rp/ton)</th>
+              <th scope="col">Harga Acuan ($/ton)</th>
+                <th scope="col">Kurs Rupiah ($/ton)</th>
+               <th scope="col">Kalori</th>
+               <th scope="col">TM</th>
+                <th scope="col">TS</th>
+                <th scope="col">ASH</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ hp.bulan }}</td>
+              <td>{{ hp.tahun }}</td>
+                <td>{{ hp.hargaperkiraan |floatformat:-2  }}</td>
+                <td>{{ hp.hbaperton }}</td>
+                <td>{{ hp.kursrupiah }}</td>
+                 <td>{{ hp.kalori }}</td>
+                <td>{{ hp.tm}}</td>
+                 <td>{{ hp.ts }}</td>
+                <td>{{ hp.ash }}</td>
+
+
+            </tr>
+
+          </tbody>
+        </table>
+
+    <div class="alert alert-primary" role="alert">
+            <h3>Kalor Rekomendasi {{ unit.namapltu}} {{namaunit}}</h3>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+
+              <th scope="col">Timestamp</th>
+              <th scope="col">ROH</th>
+              <th scope="col">NPHR</th>
+                <th scope="col">Kalor Rekomendasi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rohunit in rohunits %}
+            <tr>
+                <td>{{ rohunit.timestamp|date:'Y-m-d G:i:s'}}</td>
+                <td>{{ rohunit.roh}}</td>
+                <td>{{ rohunit.nphr}}</td>
+                <td>{{ rohunit.rk}}</td>
+              <td>
+
+              </td>
+
+
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+{% endblock content %}

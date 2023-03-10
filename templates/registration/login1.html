@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+    <div class="container">
+    <div class="row">
+    <div class="col">
+      1 of 2
+    </div>
+    <div class="col">
+      <section class="vh-100" style="background-color: #508bfc;">
+  <div class="container py-5 h-90">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <h3 class="mb-5">Sign in</h3>
+            <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+                <div class="row">
+                  <div class="col-sm">
+                    <label class="form-label" >User name</label>
+                  </div>
+                  <div class="col-sm">
+                      {{ form.username }}
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm">
+                    <label class="form-label" >Password</label>
+                  </div>
+                  <div class="col-sm">
+                       {{ form.password }}
+                  </div>
+
+                </div>
+                <br>
+
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+  {# Assumes you setup the password_reset view in your URLconf #}
+
+
+
+{% endblock content %}}

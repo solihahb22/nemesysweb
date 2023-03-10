@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+     <div class="alert alert-primary" role="alert">
+            <h3>{{judul}}</h3>
+        </div>
+    <form method="POST">
+        {% csrf_token %}
+
+            <div class="form-control">
+                <label class="col-form-label">{{form.unit.label_tag}}</label>
+                <div class="col">
+                     {{form.unit}}
+                </div>
+
+                     <br>
+
+            </div>
+
+            <div class="alert alert-primary" role="alert">
+                <h5>Daya Net Unit:</h5>
+            </div>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group">
+                    <label class="col-form-label">{{form.daya_min.label_tag}}</label>
+                    <div class="col">
+                     {{form.daya_min}}
+                    </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                <label class="col-form-label">{{form.daya_max.label_tag}}</label>
+                <div class="col">
+                     {{form.daya_max}}
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="card">
+              <div class="card-header">
+                <h5>Koefisien Optimasi Pembebanan dan Pembangkitan: IC#i(Pi)= a(Pi)^2 + b(Pi) + c </h5>
+
+              </div>
+
+              <div class="card-body">
+                <h4 class="card-title"></h4>
+                 <div class="row g-3">
+              <div class="col">
+                {{form.koef_a_opt_beban}}
+              </div>
+              <div class="col">
+                {{form.koef_b_opt_beban}}
+              </div>
+            <div class="col">
+                {{form.koef_c_opt_beban}}
+              </div>
+
+        </div>
+              </div>
+
+              </div>
+            <div class="card">
+              <div class="card-header">
+                <h5>Koefisien Perhitungan Rekomendasi Kalor: Y(i)= d + e(NPHR) + f(beban) </h5>
+
+              </div>
+
+              <div class="card-body">
+                <h4 class="card-title"></h4>
+                 <div class="row g-3">
+              <div class="col">
+                {{form.koef_d_rek_kalor}}
+              </div>
+              <div class="col">
+                {{form.koef_e_rek_kalor}}
+              </div>
+            <div class="col">
+                {{form.koef_f_rek_kalor}}
+              </div>
+
+        </div>
+              </div>
+
+              </div>
+            </div>
+
+
+
+        <br>
+         <button type="submit" class="btn btn-primary btn-lg btn-block">Simpan</button>
+    </form>
+
+{% endblock content %}

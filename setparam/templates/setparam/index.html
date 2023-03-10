@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+     <div class="alert alert-primary" role="alert">
+            <h3>Tambahkan Setting Unit Boiler Untuk Optimasi Blending</h3>
+        </div>
+    <form method="POST">
+        {% csrf_token %}
+
+        {% for data in data_form %}
+            <div class="form-group">
+                <label class="col-sm-2 col-form-label">{{data.label_tag}}</label>
+                <div class="col-sm-12">
+                     {{data}}
+                </div>
+            </div>
+        {% endfor %}
+        <br>
+         <button type="submit" class="btn btn-primary btn-lg btn-block">Simpan</button>
+    </form>
+
+{% endblock content %}

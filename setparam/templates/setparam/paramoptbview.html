@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+    <div class="row">
+        <div class="col-sm">
+            <h3 class="p-3 mb-2 bg-primary text-white"> Setting Parameter Optimasi Pembebanan  {{paramoptb.unit}} </h3>
+        </div>
+      </div>
+    <div class="row">
+            <div class="col-3">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5> Unit</h5>
+              </div>
+            </div>
+            <div class="col">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5>: {{paramoptb.unit}}</h5>
+              </div>
+            </div>
+    </div>
+    <div class="row">
+            <div class="col-3">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5> Daya minimum </h5>
+              </div>
+            </div>
+            <div class="col">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5>: {{paramoptb.daya_min}}</h5>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5> Daya Maksimum </h5>
+              </div>
+            </div>
+            <div class="col">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5>: {{paramoptb.daya_max}}</h5>
+              </div>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-info" role="alert">
+                Koefisien Optimasi Pembebanan dan Pembangkitan: IC#i(Pi)= a(Pi)^2 + b(Pi) + c
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+        <table class="table table-striped">
+                          <thead>
+                            <tr>
+
+                              <th scope="col">koefisien a</th>
+                              <th scope="col">koefisien b</th>
+                              <th scope="col">koefisien c</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+
+                              <td>{{paramoptb.koef_a_opt_beban}}</td>
+                              <td>{{paramoptb.koef_b_opt_beban}}</td>
+                              <td>{{paramoptb.koef_c_opt_beban}}</td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-info" role="alert">
+                Koefisien Perhitungan Rekomendasi Kalor: Y(i)= d + e(NPHR) + f(beban)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+        <table class="table table-striped">
+                          <thead>
+                            <tr>
+
+                              <th scope="col">koefisien d</th>
+                              <th scope="col">koefisien e</th>
+                              <th scope="col">koefisien f</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+
+                              <td>{{paramoptb.koef_d_rek_kalor}}</td>
+                              <td>{{paramoptb.koef_e_rek_kalor}}</td>
+                              <td>{{paramoptb.koef_f_rek_kalor}}</td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+        </div>
+    </div>
+
+
+{% endblock content %}

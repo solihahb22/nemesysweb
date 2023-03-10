@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+      <div class="row">
+        <div class="col-sm">
+            <h3 class="mt-2">Daftar Setting Parameter Optimasi Pembebanan Unit</h3>
+
+        </div>
+      </div>
+
+
+
+              <table class="table table-striped">
+                  <thead>
+                    <tr>
+
+                      <th scope="col"> PLTU</th>
+                        <th scope="col">  Unit</th>
+                        <th scope="col">Aksi</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for paramoptbeban in paramoptbebans %}
+                      <tr>
+                          <th scope="row">{{ paramoptbeban.unit.namapltu }}</th>
+                          <td>
+                          {{ paramoptbeban.unit.namaunit }}<br>
+                          </td>
+
+                          <td>
+                             <form method="post" >
+                                  {% csrf_token %}
+                                  <a href="{% url 'setparam:detailpoptbunit' paramoptbeban.unit.id %}" class="btn btn-outline-primary">Detail</a>
+                                 <a href="{% url 'setparam:updateppoptbunit' paramoptbeban.unit.id %}" class="btn btn-outline-success">Update</a>
+                                   <a href="{% url 'setparam:deletepoptbunit' paramoptbeban.unit.id %}"  class="btn btn-outline-warning" >Delete</a>
+
+                              </form>
+                          </td>
+
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+            </div>
+      </div>
+    </div>
+
+
+{% endblock content%}

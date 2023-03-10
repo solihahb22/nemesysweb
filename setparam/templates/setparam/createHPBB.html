@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="alert alert-primary" role="alert">
+    <h3>{{ judul }}</h3>
+</div>
+<form method="POST">
+    {% csrf_token %}
+
+    {% for data in form %}
+    <div class="form-group">
+        <label class="col-sm-2 col-form-label">{{data.label_tag}}</label>
+        <div class="col-sm-12">
+            {{data}}
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+    <button type="submit" class="btn btn-primary ">Simpan</button>
+    <a class="btn btn-secondary" href="{% url 'setparam:createhpbb' %}">Cancel</a>
+</form>
+
+<div class="row g-3">
+    <p></p>
+</div>
+<div class="alert alert-primary" role="alert">
+    <h3>{{ pesan }}</h3>
+</div>
+<div class="alert alert-primary" role="alert">
+    <h3>Harga Patokan Batubara</h3>
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+
+        <th scope="col">Bulan</th>
+        <th scope="col">Tahun</th>
+        <th scope="col">Harga Perkiraan (Rp/kg)</th>
+        <th scope="col">Harga Acuan ($/ton)</th>
+        <th scope="col">Kalori</th>
+        <th scope="col">TM</th>
+        <th scope="col">TS</th>
+        <th scope="col">ASH</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if hpb %}
+    <tr>
+        <td>{{ hpb.bulan }}</td>
+        <td>{{ hpb.tahun }}</td>
+        <td>{{ hpb.hargaperkiraan |floatformat:-2 }}</td>
+        <td>{{ hpb.hbaperton }}</td>
+        <td>{{ hpb.kalori }}</td>
+        <td>{{ hpb.tm}}</td>
+        <td>{{ hpb.ts }}</td>
+        <td>{{ hpb.ash }}</td>
+        <td>
+            <form method="post" action="#">
+                {% csrf_token %}
+                <a href="{% url 'setparam:edithpbb' hpb.id %}" class="btn btn-outline-success">Edit</a>
+                <a href="{% url 'setparam:deletehpbb' hpb.id %}" class="btn btn-outline-warning">Delete</a>
+            </form>
+        </td>
+    </tr>
+    {% endif %}
+
+
+    </tbody>
+</table>
+
+{% endblock %}
+

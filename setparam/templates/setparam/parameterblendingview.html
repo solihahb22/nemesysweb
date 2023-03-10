@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm">
+            <h3 class="p-3 mb-2 bg-primary text-white"> Setting Parameter Optimasi Blending  {{parameterblending.unit}} </h3>
+        </div>
+      </div>
+
+
+
+    <div class="row">
+            <div class="col-3">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5> Unit</h5>
+              </div>
+            </div>
+            <div class="col">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5>: {{parameterblending.unit}}</h5>
+              </div>
+            </div>
+
+    </div>
+
+    <div class="row">
+            <div class="col-3">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5> AH </h5>
+              </div>
+            </div>
+            <div class="col">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5>: {{parameterblending.AH}}</h5>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5> VM </h5>
+              </div>
+            </div>
+            <div class="col">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5>: {{parameterblending.VM}}</h5>
+              </div>
+            </div>
+
+    </div>
+
+     <div class="row">
+            <div class="col-3">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5> Jumlah parameter kalor unit </h5>
+              </div>
+            </div>
+            <div class="col">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5>: {{parameterblending.nku_size}}</h5>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5> Kalor Unit </h5>
+              </div>
+            </div>
+            <div class="col">
+              <div class="p-3 mb-2 bg-light text-dark">
+                <h5>: {{parameterblending.nk_unit}}</h5>
+              </div>
+            </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="p-3 mb-2 bg-light text-dark">
+                <h5>Koefisien Corner Pada Setiap Layer</h5>
+            </div>
+        </div>
+
+    </div>
+
+        <div class="row">
+                <div class="col">
+                  <div class="p-3 mb-2 bg-light text-dark">
+                    <ul class="list-group">
+                      <li class="list-group-item active">Layer AA</li>
+                      <li class="list-group-item">Corner 1: {{parameterblending.corner1AA}}</li>
+                      <li class="list-group-item">Corner 2: {{parameterblending.corner2AA}}</li>
+                      <li class="list-group-item">Corner 3: {{parameterblending.corner3AA}}</li>
+                      <li class="list-group-item">Corner 4: {{parameterblending.corner4AA}}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="p-3 mb-2 bg-light text-dark">
+                    <ul class="list-group">
+                      <li class="list-group-item active">Layer AB</li>
+                      <li class="list-group-item">Corner 1: {{parameterblending.corner1AB}}</li>
+                      <li class="list-group-item">Corner 2: {{parameterblending.corner2AB}}</li>
+                      <li class="list-group-item">Corner 3: {{parameterblending.corner3AB}}</li>
+                      <li class="list-group-item">Corner 4: {{parameterblending.corner4AB}}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="p-3 mb-2 bg-light text-dark">
+                    <ul class="list-group">
+                      <li class="list-group-item active">Layer CD</li>
+                      <li class="list-group-item">Corner 1: {{parameterblending.corner1CD}}</li>
+                      <li class="list-group-item">Corner 2: {{parameterblending.corner2CD}}</li>
+                      <li class="list-group-item">Corner 3: {{parameterblending.corner3CD}}</li>
+                      <li class="list-group-item">Corner 4: {{parameterblending.corner4CD}}</li>
+                    </ul>
+                  </div>
+                </div>
+
+    </div>
+
+
+        <div class="row">
+                <div class="col">
+                  <div class="p-3 mb-2 bg-light text-dark">
+                    <ul class="list-group">
+                      <li class="list-group-item active">Layer EF</li>
+                      <li class="list-group-item">Corner 1: {{parameterblending.corner1EF}}</li>
+                      <li class="list-group-item">Corner 2: {{parameterblending.corner2EF}}</li>
+                      <li class="list-group-item">Corner 3: {{parameterblending.corner3EF}}</li>
+                      <li class="list-group-item">Corner4: {{parameterblending.corner4EF}}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="p-3 mb-2 bg-light text-dark">
+                    <ul class="list-group">
+                      <li class="list-group-item active">Layer FF</li>
+                      <li class="list-group-item">Corner 1: {{parameterblending.corner1FF}}</li>
+                      <li class="list-group-item">Corner 2: {{parameterblending.corner2FF}}</li>
+                      <li class="list-group-item">Corner 3: {{parameterblending.corner3FF}}</li>
+                      <li class="list-group-item">Corner 4: {{parameterblending.corner4FF}}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="p-3 mb-2 bg-light text-dark">
+
+                  </div>
+                </div>
+
+    </div>
+
+
+
+
+
+{% endblock content %}

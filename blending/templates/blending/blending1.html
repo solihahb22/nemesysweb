@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{heading}}
+{% endblock title %}
+
+{% block content %}
+    <h2>Stok Batubara </h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Sumber Pasokan</th>
+            <th scope="col">Pemasok</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Kalori</th>
+            <th scope="col">Total Moisture</th>
+            <th scope="col">Total Shulfur</th>
+            <th scope="col">Total Ash</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for coal in coals %}
+        <tr>
+            <td>
+                {{ coal.sumberpasokan }}<br>
+            </td>
+            <td>
+                {{ coal.Pemasok }}<br>
+            </td>
+            <td>
+                {{ coal.Kategori }}<br>
+            </td>
+            <td>
+                {{coal.Kalori}}
+            </td>
+            <td>
+                {{coal.TM}}
+            </td>
+            <td>
+                {{coal.TS}}
+            </td>
+            <td>
+                {{coal.ASH}}
+            </td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <form method="POST">
+        {% csrf_token %}
+        {% for data in form %}
+        <div class="form-group row">
+            {{data.label_tag}}
+            <div class="col-sm-10">
+                {{data}}
+            </div>
+
+        </div>
+        {% endfor %}
+        <div class="col-sm-10">
+            <button type="submit">Blending</button>
+        </div>
+
+    </form>
+
+
+    <h3>
+
+        {% if parameterblending.status is False %}
+        Spesifikasi batubara pada stok tidak memenuhi
+        {% endif %}
+
+    </h3>
+
+    {% if parameterblending.status is True %}
+    <div class="panel panel-success">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><h3>Spesifikasi Blending </h3></div>
+        <div class="panel-body">
+            <div class="modal-body row">
+                <div class="col-md-6">
+                    <!-- Your first column here -->
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Komposisi
+                            <span class="badge bg-primary rounded-pill">
+                                    {{parameterblending.cofiring.komposisicoal1|floatformat:-2}} : {{parameterblending.cofiring.komposisicoal2|floatformat:-2}}
+                               </span>
+                        </li>
+                        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                            Nilai Kalor
+                            <span class="badge bg-primary rounded-pill">
+                                  {{parameterblending.cofiring.Kalori|floatformat:-2}}
+                              </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Total Moisture
+                            <span class="badge bg-primary rounded-pill">
+                                   {{parameterblending.cofiring.TM|floatformat:-2}}
+                               </span>
+                        </li>
+                        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                            Total Sulfur
+                            <span class="badge bg-primary rounded-pill">
+                                   {{parameterblending.cofiring.TS|floatformat:-4}}
+                               </span>
+
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Kadar Abu
+                            <span class="badge bg-primary rounded-pill">{{parameterblending.cofiring.ASH|floatformat:-3}}</span>
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <!-- Your second column here -->
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Excess Air
+                            <span class="badge bg-primary rounded-pill">
+                                   {{parameterblending.cofiring.ExcessAir|floatformat:-2}}</span>
+
+                        </li>
+                        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                            AFR
+                            <span class="badge bg-primary rounded-pill">
+                                   {{parameterblending.cofiring.AFR|floatformat:-2}}
+                               </span>
+
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            MOT
+                            <span class="badge bg-primary rounded-pill">{{parameterblending.cofiring.MOT|floatformat:-2}}</span>
+
+                        </li>
+                        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                            Tilting Burner
+                            <span class="badge bg-primary rounded-pill">
+                                   {{parameterblending.cofiring.Tilting|floatformat:-2}}</span>
+
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Potensi Slagging
+                            <span class="badge bg-warning rounded-pill">
+                                   {{parameterblending.cofiring.Slagging}}
+                               </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <h3>Spesifikasi Batubara dan Biomass Sumber</h3>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Spesifikasi</th>
+                <th scope="col">Batubara 1</th>
+                <th scope="col">Batubara 2</th>
+                <th scope="col">Biomass</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">Pemasok</th>
+                <td>{{parameterblending.cofiring.coal1.Pemasok}}</td>
+                <td>{{parameterblending.cofiring.coal2.Pemasok}}</td>
+                <td>{{parameterblending.cofiring.biomass.Pemasok}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Nilai Kalor</th>
+                <td>{{parameterblending.cofiring.coal1.Kalori}}</td>
+                <td>{{parameterblending.cofiring.coal2.Kalori}}</td>
+                <td>{{parameterblending.cofiring.biomass.Kalori}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Total Moisture</th>
+                <td>{{parameterblending.cofiring.coal1.TM}}</td>
+                <td>{{parameterblending.cofiring.coal2.TM}}</td>
+                <td>{{parameterblending.cofiring.biomass.TM}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Total Sulfur</th>
+                <td>{{parameterblending.cofiring.coal1.TS}}</td>
+                <td>{{parameterblending.cofiring.coal2.TS}}</td>
+                <td>{{parameterblending.cofiring.biomass.TS}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Kadar Abu</th>
+                <td>{{parameterblending.cofiring.coal1.ASH}}</td>
+                <td>{{parameterblending.cofiring.coal2.ASH}}</td>
+                <td>{{parameterblending.cofiring.biomass.ASH}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Potensi Slagging</th>
+                <td>{{parameterblending.cofiring.coal1.Slagging}}</td>
+                <td>{{parameterblending.cofiring.coal2.Slagging}}</td>
+                <td>{{parameterblending.cofiring.biomass.Slagging}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Table -->
+        <h3>Pengaturan Secondary Air Damper</h3>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Corner 1</th>
+                <th scope="col">Corner 2</th>
+                <th scope="col">Corner 3</th>
+                <th scope="col">Corner 4</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">AA</th>
+                <td>{{parameterblending.cofiring.damper1AA}}</td>
+                <td>{{parameterblending.cofiring.damper2AA}}</td>
+                <td>{{parameterblending.cofiring.damper3AA}}</td>
+                <td>{{parameterblending.cofiring.damper4AA}}</td>
+            </tr>
+            <tr>
+                <th scope="row">AB</th>
+                <td>{{parameterblending.cofiring.damper1AB}}</td>
+                <td>{{parameterblending.cofiring.damper2AB}}</td>
+                <td>{{parameterblending.cofiring.damper3AB}}</td>
+                <td>{{parameterblending.cofiring.damper4AB}}</td>
+            </tr>
+            <tr>
+                <th scope="row">CD</th>
+                <td>{{parameterblending.cofiring.damper1CD}}</td>
+                <td>{{parameterblending.cofiring.damper2CD}}</td>
+                <td>{{parameterblending.cofiring.damper3CD}}</td>
+                <td>{{parameterblending.cofiring.damper4CD}}</td>
+            </tr>
+            <tr>
+                <th scope="row">EF</th>
+                <td>{{parameterblending.cofiring.damper1EF}}</td>
+                <td>{{parameterblending.cofiring.damper2EF}}</td>
+                <td>{{parameterblending.cofiring.damper3EF}}</td>
+                <td>{{parameterblending.cofiring.damper4EF}}</td>
+            </tr>
+            <tr>
+                <th scope="row">FF</th>
+                <td>{{parameterblending.cofiring.damper1FF}}</td>
+                <td>{{parameterblending.cofiring.damper2FF}}</td>
+                <td>{{parameterblending.cofiring.damper3FF}}</td>
+                <td>{{parameterblending.cofiring.damper4FF}}</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+
+
+
+{% endblock content %}

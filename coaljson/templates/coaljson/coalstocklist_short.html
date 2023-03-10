@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+<div class="alert alert-primary" role="alert">
+    <h3>Pilih Unit Boiler</h3>
+</div>
+
+    <form method="post">
+       {% csrf_token %}
+       {% for data in form %}
+    <div class="form-group">
+        <label class="col-sm-2 col-form-label">{{data.label_tag}}</label>
+        <div class="col-sm-12">
+            {{data}}
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+    <button type="submit" class="btn btn-success">Pilih</button>
+        <br>
+    </form>
+
+    {% if tampil is True %}
+
+   <div class="alert alert-primary" role="alert">
+    <h3>Stok Batubara</h3>
+</div>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">No ID</th>
+        <th scope="col">Unit</th>
+        <th scope="col">Tanggal</th>
+        <th scope="col">Asal</th>
+        <th scope="col">Pemasok</th>
+        <!--<th scope="col">Kategori</th> -->
+        <th scope="col">Kalori</th>
+        <th scope="col">TM</th>
+        <th scope="col">TS</th>
+        <th scope="col">ASH</th>
+        <th scope="col">aksi</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for coal in coals %}
+    <tr>
+
+        <th scope="row">{{coal.id}}</th>
+        <td>{{coal.unit}}</td>
+        <td>{{coal.tanggal}}</td>
+        <td>{{coal.sumberpasokan}}</td>
+        <td>{{coal.Pemasok}}</td>
+        <!--<td>{{coal.Kategori}}</td>-->
+        <td>{{coal.Kalori}}</td>
+        <td>{{coal.TM}}</td>
+        <td>{{coal.TS}}</td>
+        <td>{{coal.ASH}}</td>
+        <td>
+            <form method="post">
+                {% csrf_token %}
+                <a href="{% url 'coaljson:simpleupdatecoal2' coal.id %}" class="btn btn-outline-success">Update</a>
+            </form>
+        </td>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+    {% endif %}
+    {% if tampil is False%}
+        <h3>{{pesan}}</h3>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{heading}}
+{% endblock title %}
+
+{% block content %}
+    <h1 class="mt-2">Pilih Unit Boiler</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <button type="submit" class="btn btn-success">Pilih</button>
+    </form>
+
+    <h2>History </h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Waktu Pengisian</th>
+            <th scope="col">Operator</th>
+            <th scope="col">Coal 1</th>
+            <th scope="col">Coal 2</th>
+            <th scope="col">Cofiring/CoalBlending</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for blendinghistory in blendinghistories %}
+        <tr>
+            <td>
+                {{ blendinghistory.tanggal }}<br>
+            </td>
+            <td>
+                {{ blendinghistory.user }}<br>
+            </td>
+            <td>
+                {{ blendinghistory.coal1 }}<br>
+            </td>
+            <td>
+                {{blendinghistory.coal2}}
+            </td>
+            <td>
+                {{blendinghistory.cofiring}}
+            </td>
+
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+
+{% endblock content %}

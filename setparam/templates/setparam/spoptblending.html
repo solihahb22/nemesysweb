@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{heading}}
+{% endblock title %}
+
+{% block content %}
+     <div class="alert alert-primary" role="alert">
+            <h3>{{judul}}</h3>
+        </div>
+    <form method="POST">
+        {% csrf_token %}
+
+            <div class="form-control">
+                <label class="col-form-label">{{form.unit.label_tag}}</label>
+                <div class="col">
+                     {{form.unit}}
+                </div>
+
+                     <br>
+
+            </div>
+
+            <div class="alert alert-primary" role="alert">
+                <h5>Koefisien untuk perhitungan excess air, afr, dan tilting:</h5>
+            </div>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group">
+                    <label class="col-form-label">{{form.AH.label_tag}}</label>
+                    <div class="col">
+                     {{form.AH}}
+                    </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                <label class="col-form-label">{{form.VM.label_tag}}</label>
+                <div class="col">
+                     {{form.VM}}
+                </div>
+              </div>
+
+            </div>
+
+                <div class="alert alert-primary" role="alert">
+                <h5>Koefisien untuk perhitungan bukaan damper: </h5>
+                </div>
+
+                <div class="row ">
+                    <div class="col">
+                        <div class="form-group">
+                        <label class="col-form-label">{{form.nku_size.label_tag}}</label>
+                        <div class="col">
+                             {{form.nku_size}}
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                        <label class="col-form-label">{{form.nk_unit.label_tag}}</label>
+                        <div class="col">
+                             {{form.nk_unit}}
+                        </div>
+                    </div>
+                    </div>
+
+
+            </div>
+
+
+
+            <div class="card">
+              <div class="card-header">
+                Koefisien Corner untuk perhitungan bukaan damper
+              </div>
+
+              <div class="card-body">
+                <h5 class="card-title">Layer AA</h5>
+                 <div class="row g-3">
+              <div class="col">
+                {{form.corner1AA}}
+              </div>
+              <div class="col">
+                {{form.corner2AA}}
+              </div>
+            <div class="col">
+                {{form.corner3AA}}
+              </div>
+             <div class="col">
+                {{form.corner4AA}}
+              </div>
+        </div>
+              </div>
+                 <div class="card-body">
+                <h5 class="card-title">Layer AB</h5>
+                <div class="row g-3">
+              <div class="col">
+                {{form.corner1AB}}
+              </div>
+              <div class="col">
+                {{form.corner2AB}}
+              </div>
+            <div class="col">
+                {{form.corner3AB}}
+              </div>
+             <div class="col">
+                {{form.corner4AB}}
+              </div>
+        </div>
+              </div>
+                <div class="card-body">
+                <h5 class="card-title">Layer CD</h5>
+                 <div class="row g-3">
+              <div class="col">
+                {{form.corner1CD}}
+              </div>
+              <div class="col">
+                {{form.corner2CD}}
+              </div>
+            <div class="col">
+                {{form.corner3CD}}
+              </div>
+             <div class="col">
+                {{form.corner4CD}}
+              </div>
+        </div>
+              </div>
+                   <div class="card-body">
+                <h5 class="card-title">Layer EF</h5>
+                 <div class="row g-3">
+              <div class="col">
+                {{form.corner1EF}}
+              </div>
+              <div class="col">
+                {{form.corner2EF}}
+              </div>
+            <div class="col">
+                {{form.corner3EF}}
+              </div>
+             <div class="col">
+                {{form.corner4EF}}
+              </div>
+        </div>
+              </div>
+                   <div class="card-body">
+                <h5 class="card-title">Layer FF</h5>
+                  <div class="row g-3">
+              <div class="col">
+                {{form.corner1FF}}
+              </div>
+              <div class="col">
+                {{form.corner2FF}}
+              </div>
+            <div class="col">
+                {{form.corner3FF}}
+              </div>
+             <div class="col">
+                {{form.corner4FF}}
+              </div>
+        </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+        <br>
+         <button type="submit" class="btn btn-primary btn-lg btn-block">Simpan</button>
+    </form>
+
+{% endblock content %}

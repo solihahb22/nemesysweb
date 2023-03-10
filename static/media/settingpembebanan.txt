@@ -1,0 +1,8 @@
+daya_min:250
+daya_max:450
+koef_a:15.59
+koef_b:443872.57
+koef_c:8854230
+koef_d:2443.734
+koef_e:0.457
+koef_f:0.806

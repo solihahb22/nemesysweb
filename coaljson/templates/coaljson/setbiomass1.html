@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+    .progressbar {
+        width: 100%;
+        counter-reset: step;
+        padding-left: 1rem !important;
+    }
+    .progressbar li {
+        float: left;
+        position: relative;
+        text-align: center;
+    }
+    .progressbar li:before {
+        content:counter(step);
+        counter-increment: step;
+        width: 30px;
+        height: 30px;
+        border: 2px solid #E6E7F4;
+        background-color: #E6E7F4;
+        display: block;
+        margin: 0 auto 10px auto;
+        border-radius: 50%;
+        line-height: 27px;
+        background: #E6E7F4;
+        color: gray;
+        text-align: center;
+        font-weight: bold;
+        z-index: 1;
+    }
+    .progressbar li:after{
+        content: '';
+        position: absolute;
+        width:100%;
+        height: 3px;
+        background: #2B388F;
+        opacity: .1;
+        top: 15px;
+        left: -50%;
+    }
+    .progressbar li:first-child:after{
+        left: 0%;
+        width: 50%;
+        z-index: -1;
+    }
+    .progressbar li:last-child:after{
+        width: 150%;
+        z-index: 1;
+    }
+    .progressbar li.active:after{
+        background: #2B388F;
+        opacity: 1;
+        z-index: -99;
+       
+    }
+    .progressbar li.active {
+        color: #2B388F;
+        z-index: 1;
+    }
+    .progressbar li.active:before {
+        border-color: #fff500;
+        background: #fff500;
+        color: #2B388F;
+        z-index: 1;
+    } 
+</style>
+
+
+
+ <div class="alert alert-primary" role="alert">
+    <h4>Biomass dan Batubara Untuk Blending</h4>
+</div>
+
+<div class="row mt-5">
+
+    <div class="col-12">
+        <ul class="progressbar" >
+            <li class="active" style="width:33%; list-style-type: none; z-index: 10000">Set Biomasa</li>
+            <li class="" style="width:33%; list-style-type: none; z-index: 1000">Set Tongkang</li>
+            <li class="" style="width:33%; list-style-type: none;">Set Coalyard</li>
+        </ul>
+    </div>
+
+    <br>
+
+    <div class="col-12 mt-5">
+        <table class="table table-bordered" id="selectedcoalTbl">
+            <thead>
+                <tr>
+                    <th scope="col">No ID</th>
+                    <th scope="col">Pemasok</th>
+                    <th scope="col">Kategori</th>
+                    <th scope="col">Kalori</th>
+                    <th scope="col">TM</th>
+                    <th scope="col">TS</th>
+                    <th scope="col">ASH</th>
+                    <th scope="col">HTmax</th>
+                    <th scope="col">Jenis Abu</th>
+                    <th scope="col">Slagging</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% if selected_coals is not None %}
+                    {% for item in selected_coals %}
+                    <tr >
+                        <th scope="row" >{{item.id}}</th>
+                        <td><label>{{item.pemasok}}</label></td>
+                        <td><label >{{item.kategori}}</label></td>
+                        <td><label >{{item.kalori}}</label></td>
+                        <td><label >{{item.tm}}</label></td>
+                        <td><label >{{item.ts}}</label></td>
+                        <td><label >{{item.ash}}</label></td>
+                        <td><label >{{item.htmax}}</label></td>
+                        <td><label >{{item.jenisabu}}</label></td>
+                        <td><label >{{item.slagging}}</label></td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td>
+                            No biomass data returned.
+                        </td>
+                    </tr>
+
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div class="col-12 text-center mt-3">
+        <button type="button" class="btn btn-primary">
+            <a href="{% url 'coaljson:gettongkang' %}" style="text-decoration: none; color:white"> berikutnya </a>
+        </button>
+    </div>
+
+    <br>
+    {% if pesan is not None%}
+    <div class="alert alert-secondary" role="alert">
+        {{ pesan }}
+        </div>
+    {% endif %}
+    <br>
+</div>
+
+
+{% endblock %}
+
+
+
